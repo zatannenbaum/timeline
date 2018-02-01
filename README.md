@@ -14,7 +14,6 @@ unset DATABASE_USER
 unset DATABASE_PASSWORD
 unset AWS_ACCESS_KEY_ID
 unset AWS_SECRET_ACCESS_KEY
-unset EMAIL_PASSWORD
 ```
 
 And at the very bottom of the same file put:
@@ -24,7 +23,6 @@ export DATABASE_USER='gzuser'
 export DATABASE_PASSWORD='feb212015'
 export AWS_ACCESS_KEY_ID='???????????'
 export AWS_SECRET_ACCESS_KEY='??????????'
-export EMAIL_PASSWORD='???????'
 ```
 
 For vars with `'??????'` ask for the actual values or check the heroku config vars
