@@ -1,0 +1,51 @@
+<app-nav></app-nav>
+<div class="container">
+  <div class="card card-width mx-auto my-3 rounded">
+    <img class="card-img-top mx-auto px-4 pt-4" style="width: 99.5%;" [src]="croppedImage" *ngIf="croppedImage">
+    <div class="card-body">
+      <!-- Form with submit method and template variable (#fileInput) -->
+      <form (submit)="createPost($event)">
+        <div class="form-group">
+
+          <image-cropper style="width: 50%; margin-left: auto; margin-right: auto;"
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            [resizeToWidth]="500"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+
+          <label class="btn btn-primary" style="margin-left: auto; margin-right: auto;">
+            Add a photo<input name="image" class="form-control-file" type="file" id="newPostImage" (change)="fileChangeEvent($event)" #fileInput hidden>
+          </label>
+
+          <br><br>
+
+          <label for="newPostDate">Date of Photo/Memory/Event:</label>
+          <br>
+          <p-calendar class="calendar-input" name="date" id="newPostDate" dateFormat="MM d, yy"> [(ngModel)]="body.date_of_event">
+            <ng-template pTemplate="date" let-date>
+              <span style="font-family: Cambria, Georgia;">{{date.day}}</span>
+            </ng-template>
+          </p-calendar>
+          <br><br>
+
+          <label for="newPostTitle">Title:</label>
+          <input name="title" class="form-control" type="text" id="newPostTitle" [(ngModel)]="body.title">
+          <br>
+
+          <label for="newPostBody">Content:</label>
+          <textarea name="content" class="form-control" id="newPostBody" rows="5" [(ngModel)]="body.content"></textarea>
+          <br>
+
+          <button class="btn btn-success btn-block" type="submit" [disabled]="croppedImage.length === 0">Upload</button>
+        </div>
+
+      </form>
+      <p *ngIf="overallErrorMsg" style="color:red">{{overallErrorMsg}}</p>
+    </div>
+  </div>
+</div>

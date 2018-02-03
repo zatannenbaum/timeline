@@ -1,0 +1,24 @@
+nav {
+  background-color: #585a56;
+}
+
+.navbar .navbar-brand {
+    color: #fafafa;
+    font-family: "Lato","Helvetica Neue",Arial,sans-serif;
+}
+
+.navbar .navbar-nav>li>a {
+  color: #fafafa;
+  font-family: "Lato","Helvetica Neue",Arial,sans-serif;
+}
+
+.dropdown-menu {
+  right: 0;
+  left: auto !important;
+}
+
+i {
+  width: 18px;
+  font-size: 16px;
+  margin-right: 5px;
+}

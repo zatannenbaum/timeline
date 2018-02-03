@@ -1,0 +1,9 @@
+<div class="card card-width mx-auto my-3 rounded polaroid" *ngIf="post">
+  <img class="card-img-top mx-auto px-4 pt-4" style="width: 99.5%;" src="{{post.image}}" alt="image" *ngIf="post.image">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.content }}</p>
+  </div>
+</div>
+
+<!-- <button (click)="goBack()">go back</button> -->

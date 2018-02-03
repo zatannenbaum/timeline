@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="color: white !important;">
+  <a class="navbar-brand" href="/timeline">
+    <img src="http://localhost:8000/static/logo.png" width="30" height="30" alt="">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/timeline">Timeline</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add_post">Add Post</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown ml-auto">
+        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hello {{ user.first_name }}!
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/account">
+            <i class="fa fa-user fa-fw" style="width: 18px; font-size: 16px; margin-right: 5px;"></i> Account Info
+          </a>
+          <a class="divider"></a>
+          <a class="dropdown-item" (click)="logout()" href="/">
+            <i class="fa fa-sign-out fa-fw" style="width: 18px; font-size: 16px; margin-right: 5px;"></i> Logout
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+
+<!--   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/timeline">Timeline</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="javascript;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{ user.first_name }}!</a>
+        <ul class="dropdown-menu with-arrow pull-right dropdown-menu-scaleIn">
+          <li><a href="#">Acount Info</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a (click)="logout()" href="">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav> -->

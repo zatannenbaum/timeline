@@ -11,11 +11,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
+import boto3
+from botocore.client import Config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ON_HEROKU = os.environ.get('ON_HEROKU')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -24,10 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(@nb@6++9+13iptt(90l$+uqrtin_md%avc)qk%g1t%=h@8r-6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ON_HEROKU:
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = ['https://gztimeline.herokuapp.com/']
-
+ALLOWED_HOSTS = ['*']  # 'localhost', 'https://gztimeline.herokuapp.com/']
 
 # Application definition
 
@@ -49,7 +54,11 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'django_extensions',
+
+    'corsheaders',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -60,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'timelineapp.urls'
@@ -83,15 +94,32 @@ TEMPLATES = [
 WSGI_APPLICATION = 'timelineapp.wsgi.application'
 
 
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if ON_HEROKU:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES = {'default': db_from_env}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': get_env_variable('DATABASE_NAME'),
+            'USER': get_env_variable('DATABASE_USER'),
+            'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
+            'HOST': '',
+            'PORT': '',
+        }
     }
-}
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
@@ -124,6 +152,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# S3
+
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'greta-zach-timeline'
+AWS_BUCKET_URL = 'https://s3.us-east-2.amazonaws.com/greta-zach-timeline/'
+
+S3_CLIENT = boto3.client('s3', 'us-east-1', aws_access_key_id=AWS_ACCESS_KEY_ID,
+                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                         config=Config(signature_version='s3v4'))
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -137,12 +176,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# database update
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
