@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'timelineapp',
     'timelineapp.apps.timeline',
     'timelineapp.apps.user',
+    'timelineapp.apps.post',
 
     # Thirdparty Apps
     'rest_framework',
@@ -156,6 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
+AWS_CUSTOMER_KEY = get_env_variable('AWS_CUSTOMER_KEY')
 AWS_STORAGE_BUCKET_NAME = 'greta-zach-timeline'
 AWS_BUCKET_URL = 'https://s3.us-east-2.amazonaws.com/greta-zach-timeline/'
 

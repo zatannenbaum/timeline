@@ -49,25 +49,27 @@ export class AddPostComponent implements OnInit {
 
     // get only the base64 file
     if (this.croppedImage.length > 0) {
-
-      const data = {
+      data = {
         'image': this.croppedImage,
         'title': this.body.title,
-        'date_of_event': this.body.date_of_event,
+        'date_of_event': this.body.date_of_event.getTime(),
         'content': this.body.content
       };
     } else {
-      const data = {
+      data = {
         'title': this.body.title,
-        'date_of_event': this.body.date_of_event,
+        'date_of_event': this.body.date_of_event.getTime(),
         'content': this.body.content
       };
     }
 
+    console.log(data)
+
     this.postService.addPost(data)
         .subscribe(
-          res => {
-            this.router.navigate(['/timeline']);
+          resp => {
+            console.log(resp)
+            // this.router.navigate(['/timeline']);
             this.croppedImage = '';
           },
           err => {
