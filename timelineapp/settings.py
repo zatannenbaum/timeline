@@ -34,7 +34,7 @@ else:
     DEBUG = True
     BASE_URL = 'http://localhost:8000/'
 
-ALLOWED_HOSTS = ['*']  # 'localhost', 'https://gztimeline.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'https://gztimeline.herokuapp.com/']
 
 # Application definition
 
@@ -57,11 +57,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'django_extensions',
-
-    'corsheaders',
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
