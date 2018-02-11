@@ -1,16 +1,30 @@
-<div class="jumbotron">
-  <h1>
-    {{ title }}
-  </h1>
-  <p *ngIf="!loggedIn">
-    <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-  </p>
-  <p *ngIf="loggedIn">
-    <a class="btn btn-primary btn-lg" href="/timeline" role="button">Go to Timeline</a>
-  </p>
+<div class="container">
+  <div class="card mx-auto my-3 rounded">
+    <div class="card-body" id="content">
+      <h5 class="card-title text-center" style="margin-bottom: 0.4rem;">Happy 3 years my Greta!</h5>
+      <div class="card-text" style="margin-bottom: 5px;">
 
-<!--   <nav>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/timeline">Timeline</a>
-  </nav> -->
+<p style="white-space: pre-wrap;">G,
+
+In the past few weeks I may have told some white lies a few times or many from when you asked what I was going to be doing for the night or explaining why I was up so late. That "really interesting coding stuff" was me working on this (which wasn't so much a lie as not the whole truth) and a lot of my nights after work were spent working on this.
+
+So, what is this? This is a website I made for you and us where we can share our photos, and add titles, stories, letters, or whatever else we want to them, and we can access it whenever, wherever. It's all private just to us. I don't remember how this idea came to me, I think I wanted to work on another project besides work and decided I wanted to make something for you, and this is what I came up with. In addition to creating the website, I have started to add to it for us.
+
+I'm sure you'd like to see more at this point so you can click below to continue. I hope you love it.
+
+I love you more than anything my Greta, and I always will. Happy 3 years and I can't wait for the rest of our lives together.
+
+-Z
+</p>
+
+        <p *ngIf="!loggedIn" class="text-center">
+          <a class="btn btn-primary btn-sm" href="/login" role="button">Login</a>
+        </p>
+        <p *ngIf="loggedIn" class="text-center">
+          <a class="btn btn-primary btn-sm" href="/timeline" role="button">Go to Timeline</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
 </div>

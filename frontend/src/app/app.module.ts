@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CalendarModule } from 'primeng/calendar';
+import * as moment from 'moment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './auth.interceptor';
@@ -23,6 +23,7 @@ import { UserService } from './services/user.service';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     PostComponent,
     HomepageComponent,
     NavComponent,
-    AddPostComponent
+    AddPostComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,6 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     AppRoutingModule,
     NgbModule.forRoot(),
     ImageCropperModule,
-    AngularFontAwesomeModule,
     CalendarModule,
   ],
   providers: [

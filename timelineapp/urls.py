@@ -8,6 +8,8 @@ from rest_framework.authtoken import views as auth_view
 from timelineapp.apps.post.urls import router as post_router
 from timelineapp.apps.user.urls import router as user_router
 
+from .views import AWSTokenView
+
 api_v0_urls = (
     post_router.urls +
     user_router.urls
@@ -17,6 +19,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(api_v0_urls)),
     url(r'^api/login/', auth_view.obtain_auth_token),
+    url(r'^api/aws_tokens/', AWSTokenView.as_view()),
     url(r'^', TemplateView.as_view(template_name='index.html')),
     url(r'^(?P<path>.*)/$', TemplateView.as_view(template_name='index.html')),
 ]

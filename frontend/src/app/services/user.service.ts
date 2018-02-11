@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { User } from '../models/user';
-import { USERS } from '../mock-users';
 
 import { environment } from '../../environments/environment';
 

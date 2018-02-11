@@ -1,5 +1,6 @@
 nav {
   background-color: #585a56;
+  -webkit-box-shadow: 0 4px 9px rgba(0, 0, 0, .3);
 }
 
 .navbar .navbar-brand {
@@ -7,9 +8,9 @@ nav {
     font-family: "Lato","Helvetica Neue",Arial,sans-serif;
 }
 
-.navbar .navbar-nav>li>a {
-  color: #fafafa;
-  font-family: "Lato","Helvetica Neue",Arial,sans-serif;
+.nav-link {
+  color: #fafafa !important;
+  font-family: Cambria, Georgia;
 }
 
 .dropdown-menu {

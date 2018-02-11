@@ -29,8 +29,10 @@ SECRET_KEY = '(@nb@6++9+13iptt(90l$+uqrtin_md%avc)qk%g1t%=h@8r-6'
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_HEROKU:
     DEBUG = False
+    BASE_URL = 'https://gztimeline.herokuapp.com/'
 else:
     DEBUG = True
+    BASE_URL = 'http://localhost:8000/'
 
 ALLOWED_HOSTS = ['*']  # 'localhost', 'https://gztimeline.herokuapp.com/']
 
@@ -131,8 +133,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 25,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 }
 
 # Password validation
@@ -159,7 +161,7 @@ AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_CUSTOMER_KEY = get_env_variable('AWS_CUSTOMER_KEY')
 AWS_STORAGE_BUCKET_NAME = 'greta-zach-timeline'
-AWS_BUCKET_URL = 'https://s3.us-east-2.amazonaws.com/greta-zach-timeline/'
+AWS_BUCKET_URL = 'https://s3.us-east-1.amazonaws.com/greta-zach-timeline/'
 
 S3_CLIENT = boto3.client('s3', 'us-east-1', aws_access_key_id=AWS_ACCESS_KEY_ID,
                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,

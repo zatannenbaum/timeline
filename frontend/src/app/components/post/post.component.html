@@ -1,8 +1,24 @@
 <div class="card card-width mx-auto my-3 rounded polaroid" *ngIf="post">
-  <img class="card-img-top mx-auto px-4 pt-4" style="width: 99.5%;" src="{{post.image}}" alt="image" *ngIf="post.image">
-  <div class="card-body">
-    <h5 class="card-title">{{ post.title }}</h5>
-    <p class="card-text">{{ post.content }}</p>
+  <div class="mx-auto px-4 pt-4" style="width: 99.5%; text-align: center;" *ngIf="loadingImage">
+    <i class="mx-auto fa fa-spin fa-spinner fa-3x"></i>
+  </div>
+  <img class="card-img-top mx-auto px-4 pt-4" style="width: 99.5%;" src="{{image}}" alt="image" *ngIf="image && !loadingImage">
+  <div class="card-body" id="content">
+    <h5 class="card-title" style="margin-bottom: 0.4rem;">{{ post.title }}<span *ngIf="date_of_event" class="date-of-event font-weight-light"> ({{ date_of_event }})</span></h5>
+    <div class="dropdown float-right mr-3">
+      <i class="dropbtn fa fa-ellipsis-h fa-lg text-muted"></i>
+      <div class="dropdown-content">
+        <a class="dropdown-item" routerLink="/edit/{{post.uuid}}">Edit Post</a>
+      </div>
+    </div>
+    <p class="card-subtitle post-writer mb-2 text-muted font-italic font-weight-light">written by {{ post.created_by_user.full_name }} {{ date_created }}</p>
+    <p class="card-text"
+      [ngClass]="{'showContent': show, 'hideContent': !show}"
+      style="white-space: pre-wrap; margin-bottom: 5px;"
+    >{{ post.content }}</p>
+    <a (click)="showOrHide()" class="pull-right" style="padding-right: 30px;color: gray;font-style: italic;font-size: .9rem;" href="javascript:;">
+      {{ show_option }}
+    </a>
   </div>
 </div>
 

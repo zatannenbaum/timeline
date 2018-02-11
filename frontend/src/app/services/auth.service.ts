@@ -28,6 +28,12 @@ export class AuthService {
     return this.http.post(url, loginForm, {headers: this.headers});
   }
 
+  getAWSKeys(): Observable<any> {
+    let url: string = `${environment.base_url}/api/aws_tokens/`
+
+    return this.http.get(url)
+  }
+
   logout(): void {
     localStorage.clear();
   }

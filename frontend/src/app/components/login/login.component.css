@@ -1,0 +1,11 @@
+@media screen and (max-width: 499px) {
+  .card-width {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .card-width {
+    width: 400px;
+  }
+}

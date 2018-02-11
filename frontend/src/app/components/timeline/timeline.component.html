@@ -1,6 +1,79 @@
 <app-nav></app-nav>
 <div class="container">
+  <div class="text-center mt-3">
+    <p style="display: inline-block;">Posts {{ 1 + (page - 1) * 10 }} - {{ postsOnPage + (page-1) * 10 }} out of {{ totalPosts }}</p>
+    <div class="dropdown" style="display: inline-block;">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ordering
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="javascript:;" (click)="changeOrder('date_created', '-')">
+          Most Recently Created First
+          <i *ngIf="'date_created' === ordering && '-' === ascending" class="fa fa-check"></i>
+        </a>
+        <a class="dropdown-item" href="javascript:;" (click)="changeOrder('date_created', '')">
+          Oldest Created First
+          <i *ngIf="'date_created' === ordering && '' === ascending" class="fa fa-check"></i>
+        </a>
+        <a class="dropdown-item" href="javascript:;" (click)="changeOrder('date_of_event', '-')">
+          Most Recent Date First
+          <i *ngIf="'date_of_event' === ordering && '-' === ascending" class="fa fa-check"></i>
+        </a>
+        <a class="dropdown-item" href="javascript:;" (click)="changeOrder('date_of_event', '')">
+          Oldest Date First
+          <i *ngIf="'date_of_event' === ordering && '' === ascending" class="fa fa-check"></i>
+        </a>
+      </div>
+    </div>
+  </div>
   <div *ngFor="let post of posts">
     <app-post [post]="post"></app-post>
   </div>
+  <nav aria-label="navigation">
+    <ul class="pagination pagination-sm justify-content-center">
+      <li class="page-item" [ngClass]="{'disabled': page === 1}">
+        <a class="page-link" (click)="changePage(page - 1)">
+          <i class="fa fa-chevron-circle-left"></i>
+        </a>
+      </li>
+      <!-- first of three options -->
+      <li *ngIf="page === 1" class="page-item active">
+        <a class="page-link">1</a>
+      </li>
+      <li *ngIf="page !== 1 && page !== totalPages" class="page-item">
+        <a class="page-link" (click)="changePage(page - 1)">{{ page - 1 }}</a>
+      </li>
+      <li *ngIf="page === totalPages && totalPages > 2" class="page-item">
+        <a class="page-link" (click)="changePage(page - 2)">{{ page - 2 }}</a>
+      </li>
+      <!-- middle of three options -->
+      <li *ngIf="page !== 1 && page !== totalPages && totalPages > 1" class="page-item active">
+        <a class="page-link">{{ page }}</a>
+      </li>
+      <li *ngIf="page === 1 && totalPages > 1" class="page-item">
+        <a class="page-link" (click)="changePage(page + 1)">{{ page + 1 }}</a>
+      </li>
+      <li *ngIf="page === totalPages && totalPages === 2" class="page-item active">
+        <a class="page-link">{{ page }}</a>
+      </li>
+      <li *ngIf="page === totalPages && totalPages > 2" class="page-item">
+        <a class="page-link" (click)="changePage(page - 1)">{{ page - 1 }}</a>
+      </li>
+      <!-- last of three options -->
+      <li *ngIf="page !== 1 && page !== totalPages && totalPages > 2" class="page-item">
+        <a class="page-link" (click)="changePage(page + 1)">{{ page + 1 }}</a>
+      </li>
+      <li *ngIf="page === 1 && totalPages > 2" class="page-item">
+        <a class="page-link" (click)="changePage(page + 2)">{{ page + 2 }}</a>
+      </li>
+      <li *ngIf="page === totalPages && totalPages > 2" class="page-item active">
+        <a class="page-link">{{ page }}</a>
+      </li>
+      <li class="page-item" [ngClass]="{'disabled': page === totalPages}">
+        <a class="page-link" (click)="changePage(page + 1)">
+          <i class="fa fa-chevron-circle-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

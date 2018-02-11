@@ -41,7 +41,13 @@ export class LoginComponent implements OnInit {
         .subscribe(data => {
           localStorage.setItem('token', data['token']);
 
-          this.router.navigateByUrl(this.return);
+          this.auth.getAWSKeys()
+              .subscribe(aws => {
+                localStorage.setItem('aws_key', aws['key']);
+                localStorage.setItem('aws_md5', aws['md5']);
+
+                this.router.navigateByUrl(this.return);
+              })
         })
   }
 

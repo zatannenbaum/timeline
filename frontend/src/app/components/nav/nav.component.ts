@@ -20,6 +20,7 @@ export class NavComponent implements OnInit {
     first_name: '',
     last_name: '',
     full_name: '',
+    image_url: ''
   }
 
   constructor(

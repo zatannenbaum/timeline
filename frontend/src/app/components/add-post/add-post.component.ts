@@ -11,13 +11,9 @@ import { PostService }  from '../../services/post.service';
 })
 export class AddPostComponent implements OnInit {
 
-  acceptedMimeTypes = [
-    'image/jpeg',
-    'image/png'
-  ];
-
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  date_of_event: Date;
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -29,7 +25,6 @@ export class AddPostComponent implements OnInit {
   overallErrorMsg = '';
 
   body = {
-    date_of_event: new Date(),
     title: '',
     content: ''
   }
@@ -52,32 +47,30 @@ export class AddPostComponent implements OnInit {
       data = {
         'image': this.croppedImage,
         'title': this.body.title,
-        'date_of_event': this.body.date_of_event.getTime(),
         'content': this.body.content
       };
     } else {
       data = {
         'title': this.body.title,
-        'date_of_event': this.body.date_of_event.getTime(),
         'content': this.body.content
       };
     }
 
-    console.log(data)
+    if (this.date_of_event) {
+      data['date_of_event'] = this.date_of_event.getTime()
+    }
 
     this.postService.addPost(data)
         .subscribe(
           resp => {
             console.log(resp)
-            // this.router.navigate(['/timeline']);
+            this.router.navigate(['/timeline']);
             this.croppedImage = '';
           },
           err => {
             this.overallErrorMsg = 'Could not create a new post.';
           }
         );
-
-
   }
 
 }

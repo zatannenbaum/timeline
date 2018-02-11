@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   base_url: 'http://localhost:8000',
+  aws_url: 'https://s3.us-east-1.amazonaws.com/greta-zach-timeline/',
 };

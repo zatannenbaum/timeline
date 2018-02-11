@@ -26,7 +26,7 @@
 
           <label for="newPostDate">Date of Photo/Memory/Event:</label>
           <br>
-          <p-calendar class="calendar-input" name="date" id="newPostDate" dateFormat="MM d, yy"> [(ngModel)]="body.date_of_event">
+          <p-calendar class="calendar-input" name="date" id="newPostDate" dateFormat="MM d, yy" [(ngModel)]="date_of_event">
             <ng-template pTemplate="date" let-date>
               <span style="font-family: Cambria, Georgia;">{{date.day}}</span>
             </ng-template>

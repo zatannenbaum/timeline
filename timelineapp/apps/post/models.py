@@ -13,3 +13,4 @@ class Post(FullModelMixin):
     date_of_event = models.DateTimeField(null=True, blank=True)
     image_url = models.CharField(max_length=100, null=True)
     content = models.TextField()
+    archived = models.BooleanField(default=False)
