@@ -26,7 +26,7 @@ ON_HEROKU = os.environ.get('ON_HEROKU')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(@nb@6++9+13iptt(90l$+uqrtin_md%avc)qk%g1t%=h@8r-6'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# HEROKU specific settings
 if ON_HEROKU:
     DEBUG = False
     BASE_URL = 'https://gztimeline.herokuapp.com/'
