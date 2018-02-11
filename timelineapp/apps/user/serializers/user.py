@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.full_name
 
     def get_image_url(self, obj):
-        return settings.BASE_URL + 'static/' + obj.first_name + '.jpg'
+        return settings.BASE_URL + 'static/' + obj.first_name.lower() + '.jpg'
 
     class Meta:
         model = CustomUser
