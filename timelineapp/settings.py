@@ -34,7 +34,7 @@ else:
     DEBUG = True
     BASE_URL = 'http://localhost:8000/'
 
-ALLOWED_HOSTS = ['localhost', 'https://gztimeline.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
 
 # Application definition
 
