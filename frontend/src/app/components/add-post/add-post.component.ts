@@ -14,6 +14,7 @@ export class AddPostComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   date_of_event: Date;
+  saving: boolean = false;
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -40,6 +41,7 @@ export class AddPostComponent implements OnInit {
   createPost(event: Event) {
     event.preventDefault();
 
+    this.saving = true;
     let data = {};
 
     // get only the base64 file
@@ -63,11 +65,12 @@ export class AddPostComponent implements OnInit {
     this.postService.addPost(data)
         .subscribe(
           resp => {
-            console.log(resp)
+            this.saving = false;
             this.router.navigate(['/timeline']);
             this.croppedImage = '';
           },
           err => {
+            this.saving = false;
             this.overallErrorMsg = 'Could not create a new post.';
           }
         );

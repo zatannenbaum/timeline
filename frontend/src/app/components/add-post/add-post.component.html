@@ -41,7 +41,7 @@
           <textarea name="content" class="form-control" id="newPostBody" rows="5" [(ngModel)]="body.content"></textarea>
           <br>
 
-          <button class="btn btn-success btn-block" type="submit">Upload</button>
+          <button class="btn btn-success btn-block" type="submit" [ngClass]="{'disabled': saving}"><i *ngIf="saving" class="fa fa-spin fa-spinner"></i> Upload</button>
         </div>
 
       </form>

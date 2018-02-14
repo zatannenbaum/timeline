@@ -30,11 +30,12 @@ SECRET_KEY = '(@nb@6++9+13iptt(90l$+uqrtin_md%avc)qk%g1t%=h@8r-6'
 if ON_HEROKU:
     DEBUG = False
     BASE_URL = 'https://gztimeline.herokuapp.com/'
+    ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
 else:
     DEBUG = True
     BASE_URL = 'http://localhost:8000/'
-
-ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
+    ALLOWED_HOSTS = ['*']
+    CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -57,6 +58,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'django_extensions',
+
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
